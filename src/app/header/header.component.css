@@ -1,0 +1,36 @@
+div{
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#header-container {
+    width: 100%;
+    justify-content: center;
+}
+
+#title {
+    font-size: 30px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.nav-button {
+    font-size: 20px;
+    margin: 5px;
+}
+
+.social-media-link {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+}
+
+#fb {
+
+    background-color: blue;
+}
+
+#ig {
+    background-color: purple;
+}
