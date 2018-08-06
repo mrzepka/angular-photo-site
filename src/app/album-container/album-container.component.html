@@ -1,9 +1,12 @@
 <div id="container">
-    <ul>
-        <li *ngFor="let album of albums"
-        [class.selected]="album === selectedAlbum"
-        (click)="onSelect(album)">
-            <app-album></app-album>
-        </li>
-    </ul>
+    <div *ngIf="selectedAlbum == undefined">
+        <ul>
+            <li *ngFor="let album of albums"
+            [class.selected]="album === selectedAlbum"
+            (click)="onSelect(album)">
+                <app-album></app-album>
+            </li>
+        </ul>
+    </div>
+
 </div>
