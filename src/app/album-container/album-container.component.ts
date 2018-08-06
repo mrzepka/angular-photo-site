@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Album } from '../album';
 import { ALBUMS } from '../all-albums';
+import { ToggleSelectedService } from '../toggle-selected.service';
 
 @Component({
   selector: 'app-album-container',
@@ -14,14 +15,17 @@ export class AlbumContainerComponent implements OnInit {
   selectedAlbum: Album;
 
   onSelect(album: Album) : void {
-    this.selectedAlbum = album;
-    console.log('selected album is');
-    console.log(this.selectedAlbum.name);
+    this.toggleSelectedService.select(album);
   }
 
-  constructor() { }
+  constructor(
+    private toggleSelectedService: ToggleSelectedService
+  ) { }
 
   ngOnInit() {
+    this.toggleSelectedService.selectedAlbumUpdated.subscribe(
+      (album) => this.selectedAlbum = this.toggleSelectedService.getSelected()
+    )
   }
 
 }
