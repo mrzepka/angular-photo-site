@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumContainerComponent } from './album-container/album-container.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     AlbumComponent,
-    AlbumContainerComponent
+    AlbumContainerComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule
