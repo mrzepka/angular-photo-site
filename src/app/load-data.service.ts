@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Album } from './album';
 import { Photo } from './photo';
 import { ALBUMS } from './all-albums';
+import { PHOTOS } from './all-photos';
 
 
 @Injectable({
@@ -15,6 +16,10 @@ export class LoadDataService {
 
   getAlbums(): Observable<Album[]> {
     return of(ALBUMS);
+  }
+
+  getPhotos(): Observable<Photo[]> {
+    return of(PHOTOS);
   }
 
   constructor() { }

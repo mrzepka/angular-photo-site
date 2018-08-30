@@ -4,7 +4,17 @@
             <li *ngFor="let album of albums"
             [class.selected]="album === selectedAlbum"
             (click)="onSelect(album)">
-                <app-album></app-album>
+                <app-album [album]="album"></app-album>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="selectedAlbum != undefined">
+        <ul>
+            <li *ngFor="let photo of photos"
+            [class.selected]="photo.album === selectedAlbum"
+            >
+                <app-photo></app-photo>
             </li>
         </ul>
     </div>
