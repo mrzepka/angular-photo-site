@@ -11,12 +11,9 @@
 
     <div *ngIf="selectedAlbum != undefined">
         <ul>
-            <li *ngFor="let photo of photos"
-            [class.selected]="photo.album === selectedAlbum"
-            >
-                <app-photo></app-photo>
+            <li *ngFor="let photo of photos">
+                <app-photo [photo]="photo" *ngIf="photo.album === selectedAlbum.id"></app-photo>
             </li>
         </ul>
     </div>
-
 </div>
