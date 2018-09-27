@@ -9,17 +9,14 @@ app.listen(3000, () => {
 
 //Get all albums from db
 app.get("/getAlbums", (req, res, next) => {
-  albumListGetter = makeSQLRequest('SELECT * FROM albums');
-  albumListGetter.then((results) => {
+  makeSQLRequest('SELECT * FROM albums').then((results) => {
     res.json(results);
   });
-
 });
 
 //Get all photos from an album
 app.get("/getPhotos/:id", (req, res, next) => {
-  photoGetter = makeSQLRequest('SELECT * FROM photos WHERE album = ' + req.params.id);
-  photoGetter.then((results) => {
+  makeSQLRequest('SELECT * FROM photos WHERE album = ' + req.params.id).then((results) => {
     res.json(results);
   });
 });
@@ -37,11 +34,10 @@ connection.connect(function(err) {
   console.log("Connected to SQL...");
 });
 
-function makeSQLRequest (query) {
+async function makeSQLRequest (query) {
   var promise = new Promise(function (resolve, reject) {
     connection.query(query, function (error, results) {
       if (error) throw error;
-      console.log('got back: ', results);
       resolve(results);
     });
   });
