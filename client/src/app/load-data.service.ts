@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from
+'@angular/common/http';
 
 import { Album } from './album';
 import { Photo } from './photo';
-import { ALBUMS } from './all-albums';
-import { PHOTOS } from './all-photos';
+import { Configuration } from './constants';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class LoadDataService {
-  totalAlbumList: Album[];
-  photoList: Photo[];
 
-  getAlbums(): Observable<Album[]> {
-    return of(ALBUMS);
+  private albumUrl: string;
+  private photoUrl: string;
+
+  constructor(private http: HttpClient, private configuration: Configuration) {
+    this.albumUrl = configuration.serverWithAlbumUrl;
+    this.photoUrl = configuration.serverWithPhotoUrl;
   }
 
-  getPhotos(): Observable<Photo[]> {
-    return of(PHOTOS);
+  public getAlbums(): Observable<Album[]> {
+    return this.http.get<Album[]>(this.albumUrl);
   }
 
-  constructor() { }
+  public getPhotos(id: number): Observable<Photo[]> {
+    return this.http.get<Photo[]>(this.photoUrl + id);
+  }
+
+
 }

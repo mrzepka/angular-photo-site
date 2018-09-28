@@ -20,6 +20,7 @@ export class AlbumContainerComponent implements OnInit {
 
   onSelect(album: Album) : void {
     this.toggleSelectedService.select(album);
+    this.getPhotos();
   }
 
   getAlbums(): void {
@@ -28,7 +29,8 @@ export class AlbumContainerComponent implements OnInit {
   }
 
   getPhotos(): void {
-    this.loadDataService.getPhotos()
+    console.log(this.selectedAlbum);
+    this.loadDataService.getPhotos(this.selectedAlbum.id)
       .subscribe(photos => this.photos = photos);
   }
 
@@ -42,8 +44,6 @@ export class AlbumContainerComponent implements OnInit {
       (album) => this.selectedAlbum = this.toggleSelectedService.getSelected()
     );
     this.getAlbums();
-    this.getPhotos();
-    console.log(this.albums);
   }
 
 }

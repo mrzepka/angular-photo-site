@@ -3,22 +3,38 @@ var mysql = require('mysql');
 
 var app = express();
 
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
 
 //Get all albums from db
-app.get("/getAlbums", (req, res, next) => {
-  makeSQLRequest('SELECT * FROM albums').then((results) => {
-    res.json(results);
-  });
+app.get("/getAlbums", async (req, res) => {
+  const results = await makeSQLRequest('SELECT * FROM albums');
+  res.json(results);
 });
 
 //Get all photos from an album
-app.get("/getPhotos/:id", (req, res, next) => {
-  makeSQLRequest('SELECT * FROM photos WHERE album = ' + req.params.id).then((results) => {
-    res.json(results);
-  });
+app.get("/getPhotos/:id", async (req, res) => {
+  const results = await makeSQLRequest('SELECT * FROM photos WHERE album = ' + req.params.id);
+  res.json(results);
 });
 
 //SQL related code below (maybe separate into different file)
@@ -35,13 +51,12 @@ connection.connect(function(err) {
 });
 
 async function makeSQLRequest (query) {
-  var promise = new Promise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     connection.query(query, function (error, results) {
       if (error) throw error;
       resolve(results);
     });
   });
-  return promise;
 }
 
 //Handle ctrl + C exits
