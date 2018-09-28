@@ -27,5 +27,4 @@ export class LoadDataService {
     return this.http.get<Photo[]>(this.photoUrl + id);
   }
 
-
 }

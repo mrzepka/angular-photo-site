@@ -7,9 +7,9 @@ import { HeaderComponent } from './header/header.component';
 import { AlbumComponent } from './album/album.component';
 import { AlbumContainerComponent } from './album-container/album-container.component';
 import { PhotoComponent } from './photo/photo.component';
+
 import { Configuration } from './constants'
 import { LoadDataService } from './load-data.service';
-
 
 @NgModule({
   declarations: [

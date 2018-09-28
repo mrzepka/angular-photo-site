@@ -21,6 +21,7 @@ export class AlbumContainerComponent implements OnInit {
   onSelect(album: Album) : void {
     this.toggleSelectedService.select(album);
     this.getPhotos();
+
   }
 
   getAlbums(): void {
